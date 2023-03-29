@@ -1,4 +1,5 @@
-import './globals.css'
+import './globals.css';
+import Nav from './auth/Nav'
 
 import Provider from './providers'
 
@@ -15,8 +16,9 @@ export default function RootLayout({
   return (
     <html lang="en">
 
-      <body>
+      <body className=' bg-slate-700'>
         <Provider>
+          <Nav/>
         {children}
         </Provider>
         </body>
