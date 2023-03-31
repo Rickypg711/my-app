@@ -10,13 +10,21 @@ export default function CreatePost() {
 
   // create a post
  const {mutate} = useMutation(
-   async ({title}: {title: string}) => await axios.post('/api/post/addPost', {title})
+   async ({title}: {title: string}) => await axios.post('/api/post', {title})
  )
 
  const submitPost = async (e : React.FormEvent) => {
    e.preventDefault();
    setIsDisabled(true);
-   mutate({title});
+   mutate({title},
+    // 
+    {
+      onSuccess: () => {
+        setTitle("");
+        setIsDisabled(false);
+      }
+    }
+    );
  } 
 
   return (
