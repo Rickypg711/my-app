@@ -16,14 +16,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className=" bg-slate-700">
-        <QueryWrapper>
+        
           <Provider>
+          <QueryWrapper>
             {/* @ts-expect-error Server Component */}
 
             <Nav />
             {children}
+            </QueryWrapper>
           </Provider>
-        </QueryWrapper>
+        
       </body>
     </html>
   );

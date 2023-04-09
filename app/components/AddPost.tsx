@@ -1,23 +1,37 @@
  'use client'
 
+ 
+
+ import React, { useState, FormEvent, ChangeEvent } from "react"
+
  import { useMutation, useQueryClient } from "@tanstack/react-query";
- import React, { useState } from "react";
  import axios from "axios";
 
+ const  Title = {
+  title: "",
+}
+
+
 export default function CreatePost() {
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState('');
   const [isDisabled, setIsDisabled] =useState(false)
 
   // create a post
  const {mutate} = useMutation(
-   async ({title}: {title: string}) => await axios.post('/api/post', {title})
+   async (title: string) => 
+   await axios.post('/api/post', {title})
+  // await fetch("/api/post", {
+  //   method: "POST",
+  //   headers: { "Content-Type": "application/json" },
+  //   body: JSON.stringify({ title }),
+  // })
  )
 
  const submitPost = async (e : React.FormEvent) => {
    e.preventDefault();
    setIsDisabled(true);
-   mutate({title},
-    // 
+   mutate(title,
+    
     {
       onSuccess: () => {
         setTitle("");
@@ -25,6 +39,7 @@ export default function CreatePost() {
       }
     }
     );
+    console.log('submited')
  } 
 
   return (
