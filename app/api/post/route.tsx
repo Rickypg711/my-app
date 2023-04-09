@@ -4,10 +4,7 @@ import { getServerSession } from "next-auth";
 import { getSession } from "next-auth/react";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { useSession } from "next-auth/react"
-import { Prisma } from "@prisma/client";
-
-
-
+import {prisma }from '../../../prisma/script'
 
 
 type Poss = {
@@ -39,6 +36,10 @@ console.log('log in morro')
   // alert('sjdhfkdf')
   console.log('si se pudo wey')
 
+  const prismaUser = await prisma.user.findUnique({
+    where: {email: session?.user?.email },
+  })
+
   if (title?.length > 300) {
     console.log('plese.write somethinfg smalles')
     return console.log("too long")
@@ -48,11 +49,16 @@ console.log('log in morro')
     return console.log(' no empty please')
   }
 
-  // try{
-  //   const results = await prisma.post
-  // }catch(error){
+  try{
+    const results = await prisma.post.create({
+      data: {
+        title,
+        userId: prismaUser?.id
+      },
+    })
+  }catch(error){
 
-  // }
+  }
    return NextResponse.json({ title });
 
 
