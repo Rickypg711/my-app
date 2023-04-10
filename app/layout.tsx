@@ -2,6 +2,7 @@ import "./globals.css";
 import Nav from "./auth/Nav";
 import QueryWrapper from "./auth/QueryWrapper";
 import Provider from "./providers";
+// import { Toaster } from "react-hot-toast";
 
 export const metadata = {
   title: "Create Next App",
@@ -22,6 +23,7 @@ export default function RootLayout({
             {/* @ts-expect-error Server Component */}
 
             <Nav />
+            {/* <Toaster/> */}
             {children}
             </QueryWrapper>
           </Provider>
